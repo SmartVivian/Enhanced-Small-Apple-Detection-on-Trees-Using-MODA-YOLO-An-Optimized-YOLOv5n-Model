@@ -1,4 +1,4 @@
-  This program implements the method described in the paper "Enhanced Small Apple Detection on Trees Using MODA-YOLO: An Optimized YOLOv5n Model", published in Visual Computer. 
+  This program implements the method described in the paper "Enhanced Small Apple Detection on Trees Using MODA-YOLO: An Optimized YOLOv5n Model", published in The Visual Computer. 
  
   The model aims to achieve automated apple picking in orchards and accurately locate apples on apple trees. To achieve this, the model first adopts the lightweight backbone network MobileNetv2 and incorporates the Omni-Dimensional Dynamic Convolution (ODConv) algorithm. This approach enhances small object detection capabilities through a learnable deformation module. Additionally, the model integrates the Dynamic Head (DYHead) with a multi-head self-attention mechanism to improve detection accuracy. Finally, the Optimal Transport Assignment (OTA) algorithm is used to optimize label matching in dense target scenarios, significantly enhancing the detection performance of densely packed fruits. The model achieves an mAP of 94.4%, a 7.7% improvement over the original model.
 
