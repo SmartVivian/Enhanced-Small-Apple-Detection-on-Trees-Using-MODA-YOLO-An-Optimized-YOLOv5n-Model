@@ -12,7 +12,7 @@ To achieve high-precision apple detection, the model integrates several advanced
 
   2）Omni-Dimensional Dynamic Convolution (ODConv):Introduces learnable deformation modules.Improves adaptability to varying object shapes and sizes.Enhances feature representation, particularly for small apples.
   
-  3) Dynamic Head (DYHead) with Multi-Head Self-Attention:Strengthens feature fusion across scales.Improves the ability to capture detailed features of small apples.
+  3）Dynamic Head (DYHead) with Multi-Head Self-Attention:Strengthens feature fusion across scales.Improves the ability to capture detailed features of small apples.
  
   4）Optimal Transport Assignment (OTA) for Label Matching: Optimizes target assignment in dense object scenarios. Ensures better alignment between predictions and ground truth. Through these enhancements, the model achieves 94.4% mAP, surpassing the original baseline by 7.7%.
 
