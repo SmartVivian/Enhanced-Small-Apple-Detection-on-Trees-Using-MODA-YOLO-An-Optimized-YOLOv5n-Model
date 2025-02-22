@@ -19,7 +19,9 @@ To achieve high-precision apple detection, the model integrates several advanced
 Before running the program, ensure the required dependencies are installed:  pip install -r requirements.txt
 
   1）Training the Model Open train.py. Configure necessary paths: Dataset: /data/appletree.yaml Define dataset paths: train: /path/to/train/images val: /path/to/validation/images test: /path/to/test/images Specify class names:nc: 1  # Number of classes names: ['apple']  Model file: /models/yolov5-custom.yaml  Hyperparameters: /data/hyps/hyp.scratch-low.yaml  Adjust training parameters as needed: epochs=300 (Number of training iterations) batch_size=16 (Number of images processed at a time) img_size=640 (Input image resolution) Run the training script: python train.py --data /data/appletree.yaml --cfg /models/yolov5-custom.yaml --hyp /data/hyps/hyp.scratch-low.yaml --epochs 300 --batch-size 16 --img 640Training results, including model weights, loss curves, and logs, will be stored in runs/train/. The best model checkpoint will be saved as runs/train/exp/weights/best.pt. If training is interrupted, resume training by specifying the last saved checkpoint: python train.py --resume runs/train/exp/weights/last.pt
+  
   2） Model Evaluation Run val.py to evaluate the trained model: python val.py --weights runs/train/exp/weights/best.pt --data /data/appletree.yaml --img 640Key metrics, including mAP, Precision, and Recall, will be displayed in the console.Detailed evaluation results, including confusion matrices and per-class performance, will be saved in runs/val/.To visualize precision-recall curves and loss evolution, use TensorBoard:tensorboard --logdir=runs/train/
+  
   3） Object Detection Run detect.py for real-time or batch detection: python detect.py --weights runs/train/exp/weights/best.pt --source path_to_image_or_video --img 640 --conf 0.4 --iou 0.5Supported input sources: Single image: --source image.jpg Video file: --source video.mp4 Webcam: --source 0 Adjust confidence and IoU thresholds as needed (--conf and --iou). Detection results, including bounding boxes and class labels, will be saved in runs/detect/exp/. The detected images/videos will be stored with annotated bounding boxes for further analysis.
 
 4.  Analysis
@@ -35,3 +37,5 @@ Before running the program, ensure the required dependencies are installed:  pip
  <img width="426" alt="image" src="https://github.com/user-attachments/assets/83e6f09f-d714-4a73-ad4f-d7d2f104471a" />
 
 Model training evaluation metrics (a) F1 value-confidence (b) precision-confidence (c) recall-confidence (d) precision-recall
+
+In summary, the OHA-YOLO model provides an accurate and efficient solution for the detection of apples in orchards, improving picking precision and efficiency, reducing human intervention, and promoting the development of agricultural automation and intelligence.
