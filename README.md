@@ -1,5 +1,5 @@
 1. Introduction
-
+   
 This program implements the method described in the paper "Enhanced Small Apple Detection on Trees Using MODA-YOLO: An Optimized YOLOv5n Model", submitted to The Visual Computer journal.
 
 The OHA-YOLO model is designed for automated apple detection in orchards, aiming to improve fruit recognition accuracy and efficiency. The model incorporates multiple optimization strategies to enhance small object detection, particularly for densely packed apples on trees.
@@ -8,13 +8,68 @@ The OHA-YOLO model is designed for automated apple detection in orchards, aiming
 
 To achieve high-precision apple detection, the model integrates several advanced techniques:
 
-  1）Lightweight Backbone – MobileNetV2:Reduces computational cost while maintaining feature extraction efficiency by utilizing depthwise separable convolutions, which replace traditional convolutions with a factorized version, significantly decreasing the number of parameters and operations.Enhances real-time detection capability by leveraging an inverted residual structure with linear bottlenecks, allowing for efficient feature reuse and reducing information loss. Improves small object detection by preserving spatial details through its narrower bottleneck layers, making it suitable for detecting densely packed apples in orchard environments.
+1)Lightweight Backbone – MobileNetV2
 
-  2）Omni-Dimensional Dynamic Convolution (ODConv):Introduces learnable deformation modules.Improves adaptability to varying object shapes and sizes.Enhances feature representation, particularly for small apples.
+MobileNetV2 is a highly efficient lightweight neural network architecture designed for mobile and embedded devices. It aims to reduce computational complexity while retaining strong feature extraction capability.
+
+(1) Depthwise Separable Convolutions
+
+MobileNetV2 uses depthwise separable convolutions, which break down the traditional convolution operation into two steps:
+
+•Depthwise Convolution: A separate convolution is applied to each input channel.
+•Pointwise Convolution: A standard 1×1 convolution is used to combine the output channels.
+
+This factorization drastically reduces the number of parameters and operations compared to regular convolutions, making the network computationally efficient.
+
+(2) Inverted Residual Structure with Linear Bottlenecks
+
+The core of MobileNetV2 is the inverted residual structure, which uses a linear bottleneck to optimize the flow of information:
+
+•The input feature map undergoes a depthwise separable convolution in the high-dimensional space, followed by a linear bottleneck in the lower-dimensional space.
+•This structure minimizes information loss while reducing computational cost and makes the network more efficient.
+
+The design ensures better feature reuse and reduces information loss, which is especially useful for real-time detection on mobile devices.
+
+(3)Improvement for Small Object Detection
+
+MobileNetV2 has narrower bottleneck layers, which help to preserve spatial details in smaller objects. This characteristic is crucial for detecting small, densely packed objects like apples on trees, where fine spatial details must be maintained for accurate detection.
+
+2)Omni-Dimensional Dynamic Convolution (ODConv)
+ODConv is an innovative convolutional mechanism designed to improve adaptability to varying object shapes and sizes, making it especially useful for detecting small objects.
+(1)Learnable Deformation Modules
+
+ODConv introduces learnable deformation modules that allow convolution kernels to dynamically adjust according to the shape of the object. During training, the network learns optimal kernel shapes tailored to specific object characteristics, improving the adaptability of the model.
+This makes ODConv highly flexible, enabling the network to adjust to different object shapes in real-time.
+(2)Improved Adaptability
+Unlike traditional convolution, where kernels are fixed, ODConv can adapt to a range of object shapes and sizes. This flexibility is particularly advantageous for tasks like detecting small apples in dense orchard environments, where traditional methods might struggle.
+(3)Enhanced Feature Representation
+ODConv enhances feature extraction, particularly for small objects, by enabling the network to focus on the most relevant parts of an object. The dynamic nature of the convolution kernel allows the model to capture finer details of small apples that would otherwise be missed in traditional convolution operations.
   
-  3）Dynamic Head (DYHead) with Multi-Head Self-Attention:Strengthens feature fusion across scales.Improves the ability to capture detailed features of small apples.
- 
-  4）Optimal Transport Assignment (OTA) for Label Matching: Optimizes target assignment in dense object scenarios. Ensures better alignment between predictions and ground truth. Through these enhancements, the model achieves 94.4% mAP, surpassing the original baseline by 7.7%.
+3)Dynamic Head (DYHead) with Multi-Head Self-Attention
+
+DYHead is a novel detection head that incorporates multi-head self-attention mechanisms to improve the fusion of features across different scales, particularly for small object detection.
+
+(1) Feature Fusion Across Scales
+
+DYHead strengthens the fusion of features from multiple scales by using multi-head self-attention. In traditional detection heads, features from different layers may not be fully leveraged, but the attention mechanism allows DYHead to focus on important features at different scales.
+
+This makes it particularly effective for detecting small objects like apples, which may appear in various sizes depending on the camera's perspective.
+
+(2) Improved Ability to Capture Detailed Features
+
+The self-attention mechanism in DYHead enables the network to better capture detailed features of small objects. By dynamically adjusting the attention to different parts of the input, DYHead can focus on the most critical aspects of the image, making it more efficient at detecting small and densely packed objects in the scene.
+
+4)Optimal Transport Assignment (OTA) for Label Matching
+
+Optimal Transport Assignment (OTA) is a label matching strategy that optimizes the assignment of ground truth boxes to predicted boxes, particularly in dense object detection scenarios.
+
+(1)Label Matching Optimization
+
+In traditional object detection models, IoU (Intersection over Union) is used to match predictions with ground truth. However, in dense object scenarios (like detecting apples on a tree), many targets may have low IoU values, making it difficult to match predictions accurately. OTA optimizes label matching by leveraging optimal transport theory, which ensures a more accurate and stable assignment of predictions to ground truth.
+
+(2)Improved Alignment Between Predictions and Ground Truth
+
+OTA improves the alignment between predicted bounding boxes and ground truth in dense object scenarios. By solving the optimal transport problem, it minimizes the cost of mismatching labels, leading to more accurate predictions, especially in complex environments where objects are densely packed.
 
 3. Program Installation & Execution
 
